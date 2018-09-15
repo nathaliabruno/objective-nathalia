@@ -3,13 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>Objective Solutions - Nathalia Bruno Test</title>
 </head>
 <body>
-    <div class="content">
-        <h1>Webpack Boilerplate</h1>
-        <h3>Replace this page with your own code</h3>
-        <p>testing html hot reload</p>
+    <div class="wrapper">
+        <header class="header">
+            <h1 class="header-title">
+                <strong>Busca Marvel</strong> Teste Front-end
+                <span class="header-title-line"></span>
+            </h1>
+            <h2 class="header-subtitle">
+                Nathalia Bruno
+            </h2>
+        </header>
+        <section class="content">
+            <form action="" class="content-form">
+                <label for="input-search" class="content-form-label">Nome do Personagem</label>
+                <input type="text" id="input-search" class="content-form-input">
+            </form>
+            <section class="content-results">
+                <ul class="content-results-list">
+                    <li class="content-results-list-header">
+                        <div>Personagem</div>
+                        <div>Séries</div>
+                        <div>Eventos</div>
+                    </li>
+                    <li id="id_1009351" class="content-results-list-item">
+                        <div>
+                            <img src="http://i.annihil.us/u/prod/marvel/i/mg/5/a0/538615ca33ab0/standard_medium.jpg" alt="Hulk" class="content-results-list-item-image">
+                            <h4 class="content-results-list-item-name">
+                                Hulk
+                            </h4>
+                        </div>
+                        <div>
+                            <ul class="content-results-list-item-series">
+                                <li class="content-results-list-item-description">5 Ronin (2011)</li>
+                                <li class="content-results-list-item-description">5 Ronin (2010)</li>
+                                <li class="content-results-list-item-description">A+X (2012 - Present)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="content-results-list-item-events">
+                                <li class="content-results-list-item-description">Acts of Vengeance!</li>
+                                <li class="content-results-list-item-description">Age of X</li>
+                                <li class="content-results-list-item-description">Chaos War</li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+            </section>
+            <nav class="content-pagination">
+                <ul class="content-pagination-list">
+                    <li class="content-pagination-prev --inactive"><a href=""></a></li>
+                    <li class="content-pagination-list-item --active"><a href="">1</a></li>
+                    <li class="content-pagination-list-item"><a href="">2</a></li>
+                    <li class="content-pagination-list-item"><a href="">3</a></li>
+                    <li class="content-pagination-list-item"><a href="">4</a></li>
+                    <li class="content-pagination-list-item"><a href="">5</a></li>
+                    <li class="content-pagination-list-item"><a href="">6</a></li>
+                    <li class="content-pagination-next"><a href=""></a></li>
+                </ul>
+            </nav>
+        </section>
     </div>
+    <footer class="footer"></footer>
 </body>
 </html>

@@ -66,7 +66,7 @@ module.exports = {
 
             // CSS / SASS
             {
-                test: /\.scss/,
+                test: /\.sass/,
                 use: [
                     'style-loader',
                     {
