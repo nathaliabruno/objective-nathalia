@@ -1,8 +1,24 @@
+
+/**
+ * Helper to calc total of pages
+ *
+ * @export
+ * @param {number} totalItems
+ * @param {number} count
+ * @returns return total off pages
+ */
 export function getPaginationSize(totalItems, count) {
     let totalPages = Math.ceil(totalItems / count)
     return totalPages
 }
 
+/**
+ * Function to mounts array of pagination
+ *
+ * @export
+ * @param {number} paginationSize
+ * @returns Array with page number and offset to request
+ */
 export function mountsPagination(paginationSize) {
     let pagination = [];
     for (var i = 0; i < paginationSize; i++) {
@@ -18,8 +34,14 @@ export function mountsPagination(paginationSize) {
 
 // mountsPagination(getPaginationSize(results.total, results.count))
 
-//https://gateway.marvel.com/v1/public/characters?apikey=f804a6ba72e8f9e0aa1f02098a4d9760&offset=0&limit=10&hash=798cc55b71bd99cdbb17ea46e4d9ecc4&ts=1
 
+/**
+ * Promise to confirm status ok from request
+ *
+ * @export
+ * @param {object} response
+ * @returns promise status
+ */
 export function status (response) {
     if (response.status >= 200 && response.status < 300) {
         return Promise.resolve(response)
@@ -28,6 +50,13 @@ export function status (response) {
     }
 }
 
+/**
+ * Helper to verify and returns the JSON from request
+ *
+ * @export
+ * @param {object} response
+ * @returns JSON from request
+ */
 export function json (response) {
     return response.json()
 }

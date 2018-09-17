@@ -21,7 +21,6 @@ var characters = 'characters'
 
 
 
-
 fetch(`${urlBase}${characters}?apikey=${publicKey}&limit=${limit}&hash=${hash}&ts=${ts}`)
     .then(status)
     .then(json)
