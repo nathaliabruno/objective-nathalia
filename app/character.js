@@ -1,4 +1,6 @@
-export default function mountsCharacter(character) {
+import {clearList, status, json } from './utils'
+
+function mountsCharacter(character) {
 
 
     let li = document.createElement('li')
@@ -59,4 +61,29 @@ export default function mountsCharacter(character) {
     }
 
     document.getElementById('results').appendChild(li)
+}
+
+
+export default function getCharacters (url) {
+    let pagination = []
+    fetch(url)
+        .then(status)
+        .then(json)
+        .then((data) => {
+            let totalPages = getPaginationSize(data.data.total, data.data.count)
+            pagination = mountsPaginationArray(totalPages)
+            mountsPaginationHTML(pagination)
+
+            if(data.data.results) {
+
+                clearList()
+                data.data.results.map( character => {
+                    mountsCharacter(character)
+                })
+
+            }
+
+
+        })
+        .catch((error) => console.log('Request failed', error))
 }

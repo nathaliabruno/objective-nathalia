@@ -9,8 +9,9 @@ import 'styles/index.sass';
 // START YOUR APP HERE
 // ================================
 
-import { mountsPaginationArray, getPaginationSize, clearList, status, json } from './utils'
-import mountsCharacter from './character'
+import { mountsPaginationArray, getPaginationSize } from './utils'
+import getCharacters from './character'
+import mountsPaginationHTML from './pagination'
 
 
 function init() {
@@ -20,46 +21,41 @@ function init() {
     const ts = '1'
     const limit = '10'
     const characters = 'characters'
+    let offset = 0
     let pagination = []
 
+    let totalPages = getPaginationSize(1482, 10)
+    pagination = mountsPaginationArray(totalPages)
+    mountsPaginationHTML(pagination)
 
-fetch(`${urlBase}${characters}?apikey=${publicKey}&limit=${limit}&hash=${hash}&ts=${ts}`)
-    .then(status)
-    .then(json)
-    .then((data) => {
+    const pagesItems = document.getElementsByClassName('content-pagination-list-item')
 
-        if(data.data.results) {
-            clearList()
-            data.data.results.map( character => {
-                mountsCharacter(character)
-                pagination = mountsPaginationArray(getPaginationSize(data.data.total, data.data.count))
-            })
-        }
-        if(pagination) {
-            console.log(pagination)
-            let nav = document.getElementById('pagination')
+    for (var i = 0; i < totalPages; i++) {
 
-            let ul = document.createElement('ul')
-            ul.setAttribute('class', 'content-pagination-list')
-            pagination.map(page => {
+        pagesItems[i].firstChild.addEventListener('click', e => {
+            e.preventDefault
+            let _this = e.target
+            history.pushState('', _this.href)
+        })
+    }
 
-                let li = document.createElement('li')
-                li.setAttribute('class', 'content-pagination-list-item')
-                li.dataset.offset = page.offset
-                let link = document.createElement('a')
-                link.setAttribute('href', `#${page.pageNumber}`)
-                link.innerText = page.pageNumber
+    window.addEventListener('popstate', requestPage);
 
-                li.appendChild(link)
-                ul.appendChild(li)
 
-            })
+    function requestPage() {
+        let pageNumber = window.location.hash
+        pageNumber = pageNumber.replace('#', '')
 
-            nav.appendChild(ul)
-        }
+        let linkPage = document.getElementById(`page_${pageNumber}`)
+        offset = linkPage.dataset.offset
 
-    })
-    .catch((error) => console.log('Request failed', error))
+        console.log(`${urlBase}${characters}?apikey=${publicKey}&limit=${limit}&hash=${hash}&ts=${ts}&offset=${offset}`)
+
+    }
+
+
+
+     getCharacters(`${urlBase}${characters}?apikey=${publicKey}&limit=${limit}&hash=${hash}&ts=${ts}`)
 
 }
 
