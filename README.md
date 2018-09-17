@@ -1,7 +1,9 @@
-# Test to objective solutions
+# MTA | Marvel Test APP.
+
+### Test to Objective solutions.
 
 ## To install dependecies
-```npm install``` 
+```npm install```
 
 ## To start development mode
 ```npm run dev```
