@@ -19,7 +19,7 @@ export function getPaginationSize(totalItems, count) {
  * @param {number} paginationSize
  * @returns Array with page number and offset to request
  */
-export function mountsPagination(paginationSize) {
+export function mountsPaginationArray(paginationSize) {
     let pagination = [];
     for (var i = 0; i < paginationSize; i++) {
         pagination.push(
@@ -61,3 +61,19 @@ export function json (response) {
     return response.json()
 }
 
+
+/**
+ * Helper to clear list of characters
+ *
+ * @export
+ */
+export function clearList() {
+    let list = document.getElementById('results')
+
+    let header = document.createElement('li')
+    header.setAttribute('class', 'content-results-list-header')
+    header.innerHTML = '<div>Personagem</div> <div>Séries</div> <div>Eventos</div>'
+
+    list.innerHTML = ''
+    list.prepend(header)
+}

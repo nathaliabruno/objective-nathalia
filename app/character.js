@@ -1,4 +1,6 @@
 export default function mountsCharacter(character) {
+
+
     let li = document.createElement('li')
     li.setAttribute('id', `id_${character.id}`)
     li.setAttribute('class', 'content-results-list-item')
@@ -55,7 +57,6 @@ export default function mountsCharacter(character) {
 
         thirdColumn.appendChild(events)
     }
-
 
     document.getElementById('results').appendChild(li)
 }
