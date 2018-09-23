@@ -81,7 +81,6 @@ function getPaginationWidth(element) {
     const itemW = element.offsetWidth
     const totalPages = document.getElementsByClassName('content-pagination-list-item').length
     const ul = document.getElementById('pagination').firstChild
-    console.log(ul)
     let width = ((itemW + 20) * totalPages) + 'px'
 
      ul.style.width = width
