@@ -1,4 +1,5 @@
 import mountsPaginationHTML from './pagination'
+import {listenerToDetails} from './details'
 import {clearList, status, json, mountsPaginationArray, getPaginationSize } from './utils'
 
 function mountsCharacter(character) {
@@ -86,6 +87,8 @@ export default function getCharacters (url) {
                 data.data.results.map( character => {
                     mountsCharacter(character)
                 })
+
+                listenerToDetails()
 
             } else {
                 clearList()

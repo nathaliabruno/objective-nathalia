@@ -11,6 +11,7 @@ import 'styles/index.sass';
 
 import {requestPage, listenerPagination} from './pagination'
 import search from './search'
+import getCharacterInformation from './details'
 
 function init() {
     const input = document.getElementById('input-search')
