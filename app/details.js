@@ -46,6 +46,26 @@ function getSeries(id) {
         .catch((error) => console.log('Request failed', error))
 }
 
+function getEvents(id) {
+    fetch(`https://gateway.marvel.com/v1/public/characters/${id}/events?apikey=f804a6ba72e8f9e0aa1f02098a4d9760&limit=10&hash=798cc55b71bd99cdbb17ea46e4d9ecc4&ts=1`)
+        .then(status)
+        .then(json)
+        .then((data) => {
+            if(data.data.results.length > 0) {
+
+                data.data.results.map( event => {
+                   console.log(event)
+
+                })
+
+            }
+
+
+
+        })
+        .catch((error) => console.log('Request failed', error))
+}
+
 export function listenerToDetails() {
     const items = document.getElementsByClassName('content-results-list-item')
 
