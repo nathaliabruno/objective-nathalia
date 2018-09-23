@@ -26,9 +26,9 @@ function init() {
 
     input.addEventListener('keyup', (e) => search(e))
 
-    closeButton.addEventListener('click', modalClose)
+    closeButton.addEventListener('click', (e) => modalClose(e))
 
-    overlay.addEventListener('click', modalClose)
+    overlay.addEventListener('click', (e) => modalClose(e))
 
 }
 

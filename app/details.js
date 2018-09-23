@@ -16,7 +16,8 @@ export function listenerToDetails() {
 
 }
 
-export function modalClose() {
+export function modalClose(e) {
+    e.preventDefault
     document.getElementById('details-modal').classList.remove('--active')
 }
 
