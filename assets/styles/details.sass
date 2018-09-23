@@ -1,10 +1,19 @@
 .details
     display: block
     position: fixed
-    top: 0
-    bottom: 0
+    top: -1000vh
+    // bottom: 0
     left: 0
     right: 0
+
+    &-close
+        text-decoration: none
+        font-weight: 300
+        color: $secondary-color
+        position: absolute
+        font-size: rem(35)
+        top: 0
+        right: 10px
 
     &-overlay
         background: rgba(127,127,127,0.8)
@@ -14,7 +23,7 @@
 
     &-content
         background: $white
-        position: fixed
+        position: relative
         width: 80%
         height: 80%
         transform: translate(-50%, -50%)
@@ -23,6 +32,8 @@
         border-top: 4px solid $first-color
         border-bottom: 4px solid $first-color
         padding: 20px
+        display: flex
+        flex-direction: column
 
         &-title
             font-weight: 900
@@ -40,7 +51,7 @@
             display: flex
             justify-content: flex-start
             align-items: center
-            padding: 20px 0
+            padding: 50px 0
 
         &-image
             display: block
@@ -50,3 +61,49 @@
             margin-left: 20px
             font-size: rem(14)
             line-height: 1.2
+
+
+        &-columns
+            display: flex
+            justify-content: space-between
+            flex: 1 1 100%
+
+        &-section
+            flex-basis: 49%
+
+            &-title
+                background-color: $first-color
+                color: $white
+                font-size: rem(20)
+                line-height: 1.2
+                font-weight: 400
+                padding: 10px
+
+            &-list
+                overflow-y: scroll
+
+                &-item
+                    display: block
+                    padding: 10px
+                    border-bottom: $gray solid 1px
+
+                    &-external-link
+                        color: $secondary-color
+                        text-decoration: none
+                        display: block
+                        position: relative
+
+                        &:after
+                            content: '  '
+                            background-image: url('../images/external-link.svg')
+                            display: inline-block
+                            width: 20px
+                            height: 20px
+                            background-repeat: no-repeat
+                            background-size: contain
+                            background-position: center
+                            position: absolute
+                            right: 0
+
+                        &:hover
+                            font-weight: 900
