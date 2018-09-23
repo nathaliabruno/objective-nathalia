@@ -11,18 +11,24 @@ import 'styles/index.sass';
 
 import {requestPage, listenerPagination} from './pagination'
 import search from './search'
-import getCharacterInformation from './details'
+import {modalClose} from './details'
 
 function init() {
     const input = document.getElementById('input-search')
+    const closeButton = document.getElementById('close-modal')
+    const overlay = document.getElementById('overlay-close')
 
     requestPage()
 
     window.addEventListener('popstate', requestPage);
 
-
     listenerPagination()
+
     input.addEventListener('keyup', (e) => search(e))
+
+    closeButton.addEventListener('click', modalClose)
+
+    overlay.addEventListener('click', modalClose)
 
 }
 

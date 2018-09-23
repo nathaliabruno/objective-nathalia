@@ -1,5 +1,26 @@
 import { status, json } from './utils'
 
+
+export function listenerToDetails() {
+    const items = document.getElementsByClassName('content-results-list-item')
+
+    for (var i = 0; i < items.length; i++) {
+        let id = items[i].dataset.id
+        items[i].addEventListener('click', () => {
+            getCharacterInformation(id)
+            getSeries(id)
+            getEvents(id)
+            document.getElementById('details-modal').classList.add('--active')
+        })
+    }
+
+}
+
+export function modalClose() {
+    document.getElementById('details-modal').classList.remove('--active')
+}
+
+
 function getCharacterInformation(id) {
 
     const outputName = document.getElementById('character-name')
@@ -27,11 +48,11 @@ function getCharacterInformation(id) {
 }
 
 function getSeries(id) {
+    clearSeries()
     fetch(`https://gateway.marvel.com/v1/public/characters/${id}/series?apikey=f804a6ba72e8f9e0aa1f02098a4d9760&limit=10&hash=798cc55b71bd99cdbb17ea46e4d9ecc4&ts=1`)
         .then(status)
         .then(json)
         .then((data) => {
-            clearSeries()
             if(data.data.results.length > 0) {
 
                 data.data.results.map( serie => {
@@ -48,11 +69,11 @@ function getSeries(id) {
 }
 
 function getEvents(id) {
+    clearEvents()
     fetch(`https://gateway.marvel.com/v1/public/characters/${id}/events?apikey=f804a6ba72e8f9e0aa1f02098a4d9760&limit=10&hash=798cc55b71bd99cdbb17ea46e4d9ecc4&ts=1`)
         .then(status)
         .then(json)
         .then((data) => {
-            clearEvents()
             if(data.data.results.length > 0) {
                 data.data.results.map( event => {
                     mountSerieEvent(event.title, event.urls[0].url, `${event.thumbnail.path}/portrait_small.${event.thumbnail.extension}`, 'event')
@@ -77,6 +98,7 @@ function mountSerieEvent(name, url, image, type) {
     li.setAttribute('class', 'details-content-section-list-item')
     link.setAttribute('class', 'details-content-section-list-item-external-link')
     link.setAttribute('href', url)
+    link.setAttribute('target', '_blank')
     title.setAttribute('class', 'details-content-section-list-item-title')
     title.innerText = name
     img.setAttribute('class', 'details-content-section-list-item-image')
@@ -103,18 +125,4 @@ function clearSeries() {
 
 function clearEvents() {
     document.getElementById('character-events').innerHTML = ''
-}
-
-export function listenerToDetails() {
-    const items = document.getElementsByClassName('content-results-list-item')
-
-    for (var i = 0; i < items.length; i++) {
-        let id = items[i].dataset.id
-        items[i].addEventListener('click', () => {
-            getCharacterInformation(id)
-            getSeries(id)
-            getEvents(id)
-        })
-    }
-
 }
