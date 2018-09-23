@@ -31,10 +31,11 @@ function getSeries(id) {
         .then(status)
         .then(json)
         .then((data) => {
+            clearSeries()
             if(data.data.results.length > 0) {
 
                 data.data.results.map( serie => {
-                   console.log(serie)
+                   mountSerieEvent(serie.title, serie.urls[0].url, `${serie.thumbnail.path}/portrait_small.${serie.thumbnail.extension}`, 'serie')
 
                 })
 
@@ -51,10 +52,10 @@ function getEvents(id) {
         .then(status)
         .then(json)
         .then((data) => {
+            clearEvents()
             if(data.data.results.length > 0) {
-
                 data.data.results.map( event => {
-                   console.log(event)
+                    mountSerieEvent(event.title, event.urls[0].url, `${event.thumbnail.path}/portrait_small.${event.thumbnail.extension}`, 'event')
 
                 })
 
@@ -66,6 +67,44 @@ function getEvents(id) {
         .catch((error) => console.log('Request failed', error))
 }
 
+function mountSerieEvent(name, url, image, type) {
+    let seriesList = document.getElementById('character-series')
+    let eventsList = document.getElementById('character-events')
+    let li = document.createElement('li')
+    let link = document.createElement('a')
+    let title = document.createElement('h5')
+    let img = document.createElement('img')
+    li.setAttribute('class', 'details-content-section-list-item')
+    link.setAttribute('class', 'details-content-section-list-item-external-link')
+    link.setAttribute('href', url)
+    title.setAttribute('class', 'details-content-section-list-item-title')
+    title.innerText = name
+    img.setAttribute('class', 'details-content-section-list-item-image')
+    img.setAttribute('src', image)
+
+    link.appendChild(img)
+    link.appendChild(title)
+
+    li.appendChild(link)
+
+    if ( type === 'serie') {
+        seriesList.appendChild(li)
+    } else {
+        if (type === 'event') {
+            eventsList.appendChild(li)
+        }
+    }
+
+}
+
+function clearSeries() {
+    document.getElementById('character-series').innerHTML = ''
+}
+
+function clearEvents() {
+    document.getElementById('character-events').innerHTML = ''
+}
+
 export function listenerToDetails() {
     const items = document.getElementsByClassName('content-results-list-item')
 
@@ -74,6 +113,7 @@ export function listenerToDetails() {
         items[i].addEventListener('click', () => {
             getCharacterInformation(id)
             getSeries(id)
+            getEvents(id)
         })
     }
 
