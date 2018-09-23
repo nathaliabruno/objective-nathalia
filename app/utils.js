@@ -77,3 +77,13 @@ export function clearList() {
     list.innerHTML = ''
     list.prepend(header)
 }
+
+/**
+ * Helper to clear pagination
+ *
+ * @export
+ */
+export function clearPagination() {
+    let nav = document.getElementById('pagination')
+    nav.innerHTML = ''
+}

@@ -1,10 +1,11 @@
-import {clearList, status, json } from './utils'
+import mountsPaginationHTML from './pagination'
+import {clearList, status, json, mountsPaginationArray, getPaginationSize } from './utils'
 
 function mountsCharacter(character) {
 
 
     let li = document.createElement('li')
-    li.setAttribute('id', `id_${character.id}`)
+    li.dataset.id = character.id
     li.setAttribute('class', 'content-results-list-item')
 
     let firstColumn = document.createElement('div')
@@ -39,7 +40,6 @@ function mountsCharacter(character) {
             serie.innerText = character.series.items[i].name
 
             series.appendChild(serie)
-            // console.log(character.id, character.series.items[i].name)
         }
 
         secondColumn.appendChild(series)
@@ -54,7 +54,6 @@ function mountsCharacter(character) {
             event.innerText = character.events.items[i].name
 
             events.appendChild(event)
-            // console.log(character.id, character.events.items[i].name)
         }
 
         thirdColumn.appendChild(events)
@@ -63,6 +62,13 @@ function mountsCharacter(character) {
     document.getElementById('results').appendChild(li)
 }
 
+function noResults() {
+    let li = document.createElement('li')
+    li.setAttribute('class', 'content-results-list-empty')
+
+    li.innerText = 'Nenhum personagem encontrado. Verifique a digitação e tente realizar uma nova busca'
+    document.getElementById('results').appendChild(li)
+}
 
 export default function getCharacters (url) {
     let pagination = []
@@ -70,18 +76,22 @@ export default function getCharacters (url) {
         .then(status)
         .then(json)
         .then((data) => {
-            let totalPages = getPaginationSize(data.data.total, data.data.count)
+            let totalPages = getPaginationSize(data.data.total, data.data.limit)
             pagination = mountsPaginationArray(totalPages)
             mountsPaginationHTML(pagination)
 
-            if(data.data.results) {
+            if(data.data.results.length > 0) {
 
                 clearList()
                 data.data.results.map( character => {
                     mountsCharacter(character)
                 })
 
+            } else {
+                clearList()
+                noResults()
             }
+
 
 
         })

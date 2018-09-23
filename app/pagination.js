@@ -1,6 +1,11 @@
+import { clearPagination } from './utils'
+import getCharacters from './character'
+
 export default function mountsPaginationHTML(pagination) {
     if(pagination) {
         let nav = document.getElementById('pagination')
+
+        clearPagination();
 
         let ul = document.createElement('ul')
         ul.setAttribute('class', 'content-pagination-list')
@@ -23,3 +28,14 @@ export default function mountsPaginationHTML(pagination) {
     }
 }
 
+export function requestPage() {
+    let offset = 0
+    let pageNumber = window.location.hash
+    pageNumber = pageNumber.replace('#', '')
+
+    let linkPage = document.getElementById(`page_${pageNumber}`)
+    offset = linkPage.dataset.offset
+
+    getCharacters(`https://gateway.marvel.com/v1/public/characters?apikey=f804a6ba72e8f9e0aa1f02098a4d9760&limit=10&hash=798cc55b71bd99cdbb17ea46e4d9ecc4&ts=1&offset=${offset}`)
+
+}

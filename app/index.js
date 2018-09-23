@@ -9,28 +9,15 @@ import 'styles/index.sass';
 // START YOUR APP HERE
 // ================================
 
-import { mountsPaginationArray, getPaginationSize } from './utils'
 import getCharacters from './character'
-import mountsPaginationHTML from './pagination'
-
+import {requestPage} from './pagination'
+import search from './search'
 
 function init() {
-    const urlBase = 'https://gateway.marvel.com/v1/public/'
-    const publicKey = 'f804a6ba72e8f9e0aa1f02098a4d9760'
-    const hash = '798cc55b71bd99cdbb17ea46e4d9ecc4'
-    const ts = '1'
-    const limit = '10'
-    const characters = 'characters'
-    let offset = 0
-    let pagination = []
-
-    let totalPages = getPaginationSize(1482, 10)
-    pagination = mountsPaginationArray(totalPages)
-    mountsPaginationHTML(pagination)
 
     const pagesItems = document.getElementsByClassName('content-pagination-list-item')
 
-    for (var i = 0; i < totalPages; i++) {
+    for (var i = 0; i < pagesItems.length; i++) {
 
         pagesItems[i].firstChild.addEventListener('click', e => {
             e.preventDefault
@@ -41,21 +28,11 @@ function init() {
 
     window.addEventListener('popstate', requestPage);
 
+    getCharacters(`https://gateway.marvel.com/v1/public/characters?apikey=f804a6ba72e8f9e0aa1f02098a4d9760&limit=10&hash=798cc55b71bd99cdbb17ea46e4d9ecc4&ts=1`)
 
-    function requestPage() {
-        let pageNumber = window.location.hash
-        pageNumber = pageNumber.replace('#', '')
+    const input = document.getElementById('input-search')
 
-        let linkPage = document.getElementById(`page_${pageNumber}`)
-        offset = linkPage.dataset.offset
-
-        console.log(`${urlBase}${characters}?apikey=${publicKey}&limit=${limit}&hash=${hash}&ts=${ts}&offset=${offset}`)
-
-    }
-
-
-
-     getCharacters(`${urlBase}${characters}?apikey=${publicKey}&limit=${limit}&hash=${hash}&ts=${ts}`)
+    input.addEventListener('keyup', (e) => search(e))
 
 }
 

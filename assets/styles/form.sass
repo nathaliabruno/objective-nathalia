@@ -1,5 +1,7 @@
 .content-form
     margin-bottom: 34px
+    position: relative
+    max-width: 400px
 
     &-label
         color: $first-color
@@ -10,7 +12,12 @@
 
     &-input
         width: 100%
-        max-width: 400px
         height: 31px
         border: 1px $gray solid
         border-radius: 3px
+
+    &-legend
+        width: 100%
+        font-size: rem(12)
+        display: inline-block
+        position: absolute
