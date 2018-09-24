@@ -149,6 +149,9 @@ function listenerPrevNext(ul, width, elWidth){
         } else {
             next.classList.add('--inactive')
         }
+        if (document.body.offsetWidth < 768) {
+            ul.style.marginLeft = `${currentMargin - (widthToMove / 1.5)}px`
+        }
     })
 
     prev.addEventListener('click', (e) => {
@@ -160,6 +163,9 @@ function listenerPrevNext(ul, width, elWidth){
             ul.style.marginLeft = `${currentMargin + widthToMove}px`
         } else {
             prev.classList.add('--inactive')
+        }
+        if (document.body.offsetWidth < 768) {
+            ul.style.marginLeft = `${currentMargin + (widthToMove / 1.5)}px`
         }
     })
 

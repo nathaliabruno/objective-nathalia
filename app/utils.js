@@ -55,8 +55,6 @@ export function clearPagination() {
 
 export function pushUrl(href) {
     history.pushState('', '', href)
-    throttle( () => {
-        window.dispatchEvent(new Event('popstate'));
-    }, 100)
+    window.dispatchEvent(new Event('popstate'));
 }
 
