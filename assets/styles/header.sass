@@ -2,6 +2,9 @@
     display: flex
     justify-content: space-between
     margin-bottom: 34px
+    +below(768px)
+        width: 90%
+        margin: 0 auto
 
     &-title,
     &-subtitle
@@ -16,8 +19,19 @@
         strong
             font-size: rem(27)
             font-weight: 900
+
+            +below(768px)
+                font-size: rem(16)
         &-line
             display: block
             height: 4px
             width: 54px
             background-color: $first-color
+
+        +below(768px)
+            padding: 12px 0
+            font-size: rem(16)
+
+    &-subtitle
+        +below(768px)
+            display: none
