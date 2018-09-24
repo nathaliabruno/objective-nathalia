@@ -1,6 +1,6 @@
-import mountsPaginationHTML from './pagination'
+import mountsPaginationHTML, { mountsPaginationArray, getPaginationSize } from './pagination'
 import {listenerToDetails} from './details'
-import {clearList, status, json, mountsPaginationArray, getPaginationSize } from './utils'
+import {clearList, status, json, debounce} from './utils'
 
 function mountsCharacter(character) {
 

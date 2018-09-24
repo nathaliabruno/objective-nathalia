@@ -18,6 +18,7 @@ function init() {
     const closeButton = document.getElementById('close-modal')
     const overlay = document.getElementById('overlay-close')
 
+
     requestPage()
 
     window.addEventListener('popstate', requestPage);
@@ -29,7 +30,6 @@ function init() {
     closeButton.addEventListener('click', (e) => modalClose(e))
 
     overlay.addEventListener('click', (e) => modalClose(e))
-
 }
 
 init();
