@@ -1,6 +1,12 @@
 import { clearPagination, pushUrl, debounce } from './utils'
 import getCharacters from './character'
 
+/**
+ * Mounts markup of pagination
+ *
+ * @export
+ * @param {object} pagination
+ */
 export default function mountsPaginationHTML(pagination) {
     if(pagination) {
         let nav = document.getElementById('pagination')
@@ -61,7 +67,11 @@ export function mountsPaginationArray(paginationSize) {
 }
 
 
-
+/**
+ * Listener to make pagination works
+ *
+ * @export
+ */
 export function listenerPagination() {
     const pagesItems = document.getElementsByClassName('content-pagination-list-item')
 
@@ -75,6 +85,11 @@ export function listenerPagination() {
 
 }
 
+/**
+ * function to request the characters from the selected page
+ *
+ * @export
+ */
 export function requestPage() {
     let offset = 0
     let pageNumber = window.location.hash
@@ -92,7 +107,10 @@ export function requestPage() {
 
 }
 
-
+/**
+ * Helper to define active page visual
+ *
+ */
 function setActivePage() {
     let pageNumber = window.location.hash
     let linkPage = ''
@@ -114,6 +132,11 @@ function setActivePage() {
 
 }
 
+/**
+ * Function to define width of pagination
+ *
+ * @param {object} element
+ */
 function getPaginationWidth(element) {
     const itemW = element.offsetWidth + 20
     const totalPages = document.getElementsByClassName('content-pagination-list-item').length
@@ -132,6 +155,13 @@ function getPaginationWidth(element) {
     }
 }
 
+/**
+ * Function to make slide of pagination works
+ *
+ * @param {object} ul
+ * @param {string} width
+ * @param {number} elWidth
+ */
 function listenerPrevNext(ul, width, elWidth){
 
     let next = document.querySelector('.content-pagination-next')

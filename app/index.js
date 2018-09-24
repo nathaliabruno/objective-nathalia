@@ -13,6 +13,10 @@ import {requestPage, listenerPagination} from './pagination'
 import search from './search'
 import {modalClose} from './details'
 
+/**
+ * Main function to starts application
+ *
+ */
 function init() {
     const input = document.getElementById('input-search')
     const closeButton = document.getElementById('close-modal')

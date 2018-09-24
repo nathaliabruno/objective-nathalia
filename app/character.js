@@ -1,9 +1,14 @@
 import mountsPaginationHTML, { mountsPaginationArray, getPaginationSize } from './pagination'
 import {listenerToDetails} from './details'
-import {clearList, status, json, debounce} from './utils'
+import {clearList, status, json} from './utils'
 
+
+/**
+ * Function to make character markup
+ *
+ * @param {object} character
+ */
 function mountsCharacter(character) {
-
 
     let li = document.createElement('li')
     li.dataset.id = character.id
@@ -63,6 +68,10 @@ function mountsCharacter(character) {
     document.getElementById('results').appendChild(li)
 }
 
+/**
+ * Helper to show friendly error when search is empty
+ *
+ */
 function noResults() {
     let li = document.createElement('li')
     li.setAttribute('class', 'content-results-list-empty')
@@ -71,6 +80,12 @@ function noResults() {
     document.getElementById('results').appendChild(li)
 }
 
+/**
+ * Function to fetch and mount characters and pagination
+ *
+ * @export
+ * @param {string} url
+ */
 export default function getCharacters (url) {
     let pagination = []
     fetch(url)

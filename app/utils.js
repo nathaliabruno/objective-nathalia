@@ -52,7 +52,12 @@ export function clearPagination() {
     nav.innerHTML = ''
 }
 
-
+/**
+ * Helper to manipulate history browser API
+ *
+ * @export
+ * @param {string} href
+ */
 export function pushUrl(href) {
     history.pushState('', '', href)
     window.dispatchEvent(new Event('popstate'));

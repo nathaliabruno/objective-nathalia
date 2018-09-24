@@ -1,6 +1,10 @@
 import { status, json } from './utils'
 
-
+/**
+ * Function to add listener in the character to open details
+ *
+ * @export
+ */
 export function listenerToDetails() {
     const items = document.getElementsByClassName('content-results-list-item')
 
@@ -16,12 +20,22 @@ export function listenerToDetails() {
 
 }
 
+/**
+ * Helper to close modal
+ *
+ * @export
+ * @param {object} e | Event
+ */
 export function modalClose(e) {
     e.preventDefault()
     document.getElementById('details-modal').classList.remove('--active')
 }
 
-
+/**
+ * Function that inserts character details
+ *
+ * @param {number} id
+ */
 function getCharacterInformation(id) {
 
     const outputName = document.getElementById('character-name')
@@ -48,6 +62,11 @@ function getCharacterInformation(id) {
         .catch((error) => console.log('Request failed', error))
 }
 
+/**
+ * Function to fetch series
+ *
+ * @param {number} id
+ */
 function getSeries(id) {
     clearSeries()
     fetch(`https://gateway.marvel.com/v1/public/characters/${id}/series?apikey=f804a6ba72e8f9e0aa1f02098a4d9760&limit=10&hash=798cc55b71bd99cdbb17ea46e4d9ecc4&ts=1`)
@@ -69,6 +88,11 @@ function getSeries(id) {
         .catch((error) => console.log('Request failed', error))
 }
 
+/**
+ * Function to fetch events
+ *
+ * @param {number} id
+ */
 function getEvents(id) {
     clearEvents()
     fetch(`https://gateway.marvel.com/v1/public/characters/${id}/events?apikey=f804a6ba72e8f9e0aa1f02098a4d9760&limit=10&hash=798cc55b71bd99cdbb17ea46e4d9ecc4&ts=1`)
@@ -89,6 +113,14 @@ function getEvents(id) {
         .catch((error) => console.log('Request failed', error))
 }
 
+/**
+ * Function to mounts series and events
+ *
+ * @param {string} name
+ * @param {string} url
+ * @param {string} image
+ * @param {string} type
+ */
 function mountSerieEvent(name, url, image, type) {
     let seriesList = document.getElementById('character-series')
     let eventsList = document.getElementById('character-events')
@@ -120,10 +152,18 @@ function mountSerieEvent(name, url, image, type) {
 
 }
 
+/**
+ * Helper to clear series
+ *
+ */
 function clearSeries() {
     document.getElementById('character-series').innerHTML = ''
 }
 
+/**
+ * Helper to clear events
+ *
+ */
 function clearEvents() {
     document.getElementById('character-events').innerHTML = ''
 }
